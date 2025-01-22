@@ -54,12 +54,14 @@ public class LogginController implements Initializable {
             alert.setHeaderText("Por favor, introducir un nombre de usuario o una contraseña");
             alert.showAndWait();
         }
+        // Si valida, entras al programa
         if (validate(username, password)) {
 
         }
 
     }
 
+    // Checkea que tus credenciales son correctas
     private boolean validate(String username, String password) {
         String sql = "SELECT * FROM users WHERE username = '" + username + "'";
         try (Connection connection = DatabaseConnection.getConnection();
