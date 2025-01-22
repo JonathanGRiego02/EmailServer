@@ -9,8 +9,8 @@ public class Prueba2 {
         // Configuración del servidor POP3
         String host = "127.0.0.1"; // Dirección IP o nombre del servidor
         String mailStoreType = "pop3"; // Protocolo POP3
-        String user = "usuario1@localhost.com"; // Usuario del buzón
-        String password = "usuario123"; // Contraseña del usuario
+        String user = "usuario2@localhost.com"; // Usuario del buzón
+        String password = "usuario234"; // Contraseña del usuario
 
         try {
             // Configuración de propiedades para POP3
