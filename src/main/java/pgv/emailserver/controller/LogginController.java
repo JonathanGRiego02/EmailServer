@@ -14,6 +14,7 @@ import java.util.*;
 
 public class LogginController implements Initializable {
 
+    // View
 
     @FXML
     private Button CreateUser;
@@ -55,22 +56,27 @@ public class LogginController implements Initializable {
             alert.showAndWait();
         }
         if (validate(username, password)) {
-
+            System.out.println("Usuario autenticado");
         }
 
     }
 
     // Checkea que tus credenciales son correctas
     private boolean validate(String username, String password) {
-        String sql = "SELECT * FROM users WHERE username = '" + username + "'";
+        String sql = "SELECT * FROM usuarios WHERE Nombre_Usuario = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
+            // Asigna el valor del parámetro
             statement.setString(1, username);
+
+            // Ejecuta la consulta
             ResultSet resultSet = statement.executeQuery();
 
+            // Verifica si existe un resultado
             if (resultSet.next()) {
                 String contrasenaCifrada = resultSet.getString("contrasena");
+                // Compara la contraseña ingresada con la cifrada en la base de datos
                 if (contrasenaCifrada != null && !contrasenaCifrada.isEmpty()) {
                     return BCrypt.checkpw(password, contrasenaCifrada);
                 }
@@ -81,8 +87,17 @@ public class LogginController implements Initializable {
             System.err.println("Hash inválido: " + e.getMessage());
         }
         return false;
-   }
+    }
 
+    public LogginController() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Loggin.fxml"));
+        loader.setController(this);
+        try {
+            loader.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

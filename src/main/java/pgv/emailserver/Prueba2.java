@@ -98,6 +98,7 @@ public class Prueba2 {
                 System.out.println("De: " + message.getFrom()[0]);
                 System.out.println("Asunto: " + message.getSubject());
                 System.out.println("Fecha: " + message.getReceivedDate());
+                System.out.println("Contenido: " + message.getContent());
             }
 
             inbox.close(false);
