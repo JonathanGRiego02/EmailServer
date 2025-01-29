@@ -2,6 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<<<<<<< HEAD
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox alignment="CENTER_LEFT" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+=======
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -17,6 +28,7 @@
                   <Label text="EMAILS RECIBIDOS" />
                </children>
             </HBox>
+>>>>>>> 74bdc1fd18f8134b92583d676a830dd16537e691
             <ListView fx:id="emailListView" VBox.vgrow="ALWAYS" />
             <Button fx:id="enviarButton" alignment="CENTER" mnemonicParsing="false" onAction="#onEnviarAction" text="Enviar" />
          </children>
