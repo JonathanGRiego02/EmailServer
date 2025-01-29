@@ -1,5 +1,6 @@
 package pgv.emailserver;
 
+import atlantafx.base.theme.NordDark;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,6 +14,7 @@ public class EmailApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Scene scene = new Scene(loginController.getRoot());
+        Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Login");
         primaryStage.show();
