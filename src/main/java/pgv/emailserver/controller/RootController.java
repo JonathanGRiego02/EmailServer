@@ -1,8 +1,10 @@
 package pgv.emailserver.controller;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 
@@ -25,8 +27,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.RowConstraints;
 import pgv.emailserver.Conexion.DBManager;
 import pgv.emailserver.controller.modelos.Email;
 
@@ -51,6 +51,9 @@ public class RootController implements Initializable {
     private final String usuario;
     private final String password;
 
+    private ObjectProperty<Email> selectedEmail = new SimpleObjectProperty<>();
+    private EmailController emailController = new EmailController();
+
     // View
     @FXML
     private ListView<Email> emailListView;
@@ -60,6 +63,10 @@ public class RootController implements Initializable {
 
     @FXML
     private BorderPane root;
+
+    @FXML
+    private VBox emptyBox;
+
 
     @FXML
     void onEnviarAction(ActionEvent event) {
@@ -133,6 +140,17 @@ public class RootController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         emailListView.itemsProperty().bind(emails);
+        selectedEmail.bind(emailListView.getSelectionModel().selectedItemProperty());
+        selectedEmail.addListener(this::onSelectedEmailChanged);
+        emailController.emailProperty().bind(selectedEmail);
+    }
+
+    private void onSelectedEmailChanged(ObservableValue<? extends Email> o, Email ov, Email nv) {
+        if (nv != null) {
+            root.setCenter(emailController.getEmailRoot());
+        } else {
+            root.setCenter(emptyBox);
+        }
     }
 
     private ObservableList<Email> GetEmails() {
@@ -156,7 +174,6 @@ public class RootController implements Initializable {
                 Email email = new Email();
                 System.out.println(message.getFrom()[0]);
                 String from = ((InternetAddress) message.getFrom()[0]).getAddress();
-                //email.setRemitente(from.substring(0, from.length() - 1) + "@localhost.com");
                 email.setRemitente(from);
                 email.setFecha(sdf.format(message.getReceivedDate()));
                 email.setAsunto(message.getSubject());
@@ -199,8 +216,7 @@ public class RootController implements Initializable {
         grid.add(mensajeArea, 1, 2);
 
         // Hacer que las columnas se ajusten al contenido
-        grid.getColumnConstraints().addAll(new ColumnConstraints(120), new ColumnConstraints(180));
-        grid.getRowConstraints().addAll(new RowConstraints(25), new RowConstraints(25), new RowConstraints(50)); 
+        grid.getColumnConstraints().addAll(new ColumnConstraints(90), new ColumnConstraints(150));
 
         dialog.getDialogPane().setContent(grid);
 

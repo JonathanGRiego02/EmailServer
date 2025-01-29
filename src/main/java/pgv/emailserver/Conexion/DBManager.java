@@ -56,7 +56,7 @@ public class DBManager {
             statement.setString(2, email.getDestinatario());
             statement.setString(3, email.getAsunto());
             statement.setString(4, email.getMensaje());
-            // formatear fecha "dd-MM-yyyy HH:mm:ss"
+            // formatear fecha "dd-MM-yyyy"
             statement.setString(5, email.getFecha());
 
             int filasInsertadas = statement.executeUpdate();
