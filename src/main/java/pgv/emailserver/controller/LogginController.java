@@ -60,7 +60,6 @@ public class LogginController implements Initializable {
             alert.setHeaderText("Por favor, introducir un nombre de usuario o una contraseña");
             alert.showAndWait();
         }
-        // Si valida, entras al programa
         if (validate(username, password)) {
             System.out.println("Usuario autenticado");
             Stage stage = (Stage) root.getScene().getWindow();
