@@ -19,7 +19,7 @@ public class Prueba {
         // Cambié el usuario a "usuario1@localhost.com"
         String user = "usuario1@localhost.com";
         String password = "usuario234";  // Mantengo la misma contraseña
-        String destinatario = "usuario2@localhost.com";  // Cambié el destinatario a "usuario2@localhost.com"
+        String destinatario = "Dani@localhost.com";  // Cambié el destinatario a "usuario2@localhost.com"
 
         while (true) {
             System.out.println("\nSeleccione una opción:");
