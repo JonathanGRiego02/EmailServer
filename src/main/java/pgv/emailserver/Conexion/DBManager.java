@@ -8,7 +8,12 @@ import java.sql.SQLException;
 
 public class DBManager {
 
-    public void guardarUsuario(String username, String contraseña) {
+    /*
+    Esta clase (quitando que la necesitemos a posteriori para gestionar guardar los emails) tiene el método GuardarUsuario
+    Básicamente es la manera de guardar los usuarios con la contraseña encriptada.
+     */
+
+    public void GuardarUsuario(String username, String contraseña) {
         if (username == null || username.isEmpty() || contraseña == null || contraseña.isEmpty()) {
             throw new IllegalArgumentException("El nombre de usuario y la contraseña no pueden estar vacíos.");
         }
@@ -37,7 +42,7 @@ public class DBManager {
 
     public static void main(String[] args) {
         DBManager dbManager = new DBManager();
-        dbManager.guardarUsuario("usuario1", "usuario234");
-        dbManager.guardarUsuario("usuario2", "usuario234");
+        dbManager.GuardarUsuario("usuario1", "usuario234");
+        dbManager.GuardarUsuario("usuario2", "usuario234");
     }
 }
