@@ -42,9 +42,32 @@ public class DBManager {
         }
     }
 
-    public void ActualizarEmails(List<Email> emails) {
-        for (Email email : emails) {
+    public void AddEmail(Email email) {
+        if (email == null) {
+            throw new IllegalArgumentException("El email no puede ser nulo.");
+        }
 
+        String sql = "INSERT INTO emails (emailRemitente, emailDestinatario, asunto, mensaje, fecha) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, email.getRemitente());
+            statement.setString(2, email.getDestinatario());
+            statement.setString(3, email.getAsunto());
+            statement.setString(4, email.getMensaje());
+            // formatear fecha "dd-MM-yyyy HH:mm:ss"
+            statement.setString(5, email.getFecha());
+
+            int filasInsertadas = statement.executeUpdate();
+            if (filasInsertadas > 0) {
+                System.out.println("Email guardado correctamente.");
+            } else {
+                System.out.println("No se pudo guardar el email.");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al guardar el email: " + e.getMessage());
         }
     }
 
