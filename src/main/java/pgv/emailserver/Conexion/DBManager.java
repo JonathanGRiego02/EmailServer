@@ -1,10 +1,12 @@
 package pgv.emailserver.Conexion;
 
 import org.mindrot.jbcrypt.BCrypt;
+import pgv.emailserver.controller.modelos.Email;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class DBManager {
 
@@ -37,6 +39,12 @@ public class DBManager {
 
         } catch (SQLException e) {
             System.err.println("Error al guardar el usuario: " + e.getMessage());
+        }
+    }
+
+    public void ActualizarEmails(List<Email> emails) {
+        for (Email email : emails) {
+
         }
     }
 

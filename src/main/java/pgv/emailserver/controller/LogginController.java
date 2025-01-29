@@ -2,6 +2,7 @@ package pgv.emailserver.controller;
 
 import javafx.event.*;
 import javafx.fxml.*;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
@@ -13,6 +14,10 @@ import java.sql.*;
 import java.util.*;
 
 public class LogginController implements Initializable {
+
+    // Model
+    private RootController rootController;
+
 
     // View
 
@@ -57,6 +62,14 @@ public class LogginController implements Initializable {
         }
         if (validate(username, password)) {
             System.out.println("Usuario autenticado");
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.close();
+            Stage primaryStage = new Stage();
+            rootController = new RootController(username, password);
+            Scene scene = new Scene(rootController.getRoot());
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Email");
+            primaryStage.show();
         }
 
     }
