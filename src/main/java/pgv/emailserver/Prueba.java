@@ -16,9 +16,9 @@ public class Prueba {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Cambié el usuario a "usuario1@localhost.com"
+
         String user = "usuario1@localhost.com";
-        String password = "usuario234";  // Mantengo la misma contraseña
+        String password = "usuario234";
         String destinatario = "Dani@localhost.com";
 
         while (true) {
