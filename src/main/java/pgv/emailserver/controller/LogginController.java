@@ -2,13 +2,14 @@ package pgv.emailserver.controller;
 
 import javafx.event.*;
 import javafx.fxml.*;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import org.mindrot.jbcrypt.*;
 import pgv.emailserver.Conexion.*;
 
+import java.io.*;
 import java.net.*;
 import java.sql.*;
 import java.util.*;
@@ -47,7 +48,18 @@ public class LogginController implements Initializable {
 
     @FXML
     void onCreateUserAction(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CreateUser.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Crear Usuario");
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

@@ -3,9 +3,7 @@ package pgv.emailserver.Conexion;
 import org.mindrot.jbcrypt.BCrypt;
 import pgv.emailserver.controller.modelos.Email;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class DBManager {
@@ -70,6 +68,26 @@ public class DBManager {
             System.err.println("Error al guardar el email: " + e.getMessage());
         }
     }
+
+    public boolean existeUsuario(String usuario) {
+        String sql = "SELECT COUNT(*) FROM usuarios WHERE Nombre_Usuario = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, usuario);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 
     public static void main(String[] args) {
         DBManager dbManager = new DBManager();
