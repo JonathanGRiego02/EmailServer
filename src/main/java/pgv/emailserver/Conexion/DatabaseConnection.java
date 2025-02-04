@@ -38,7 +38,7 @@ public class DatabaseConnection {
             dataSource = new HikariDataSource(config);
 
             // Ejecutar el script SQL desde un archivo
-            executeSqlFromFile("src/main/resources/sql/mercury.sql");
+            //executeSqlFromFile("src/main/resources/sql/mercury.sql");
         } catch (Exception e) {
             System.err.println("Error configurando la conexión: " + e.getMessage());
             throw new ExceptionInInitializerError(e);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-01-2025 a las 11:32:35
+-- Tiempo de generación: 29-01-2025 a las 14:33:04
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,9 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `emails` (
   `idEmail` int(11) NOT NULL,
-  `idRemitente` int(11) NOT NULL,
+  `emailRemitente` varchar(50) NOT NULL,
   `emailDestinatario` varchar(50) NOT NULL,
-  `mensaje` varchar(500) NOT NULL
+  `asunto` varchar(50) NOT NULL,
+  `mensaje` varchar(500) NOT NULL,
+  `fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -47,6 +49,14 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `Nombre_Usuario`, `contrasena`) VALUES
+(1, 'usuario1', 0x243261243130244b594457555738516a676442516d506352576364794f46667556535271657539366e437331654974426465794f7976572e64555357),
+(2, 'usuario2', 0x243261243130247369794a6a556a42447a776835544b517a526a5341656a71664c617a7267526b3369354d584e2e484346756733782e36316d444832);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -54,8 +64,7 @@ CREATE TABLE `usuarios` (
 -- Indices de la tabla `emails`
 --
 ALTER TABLE `emails`
-  ADD PRIMARY KEY (`idEmail`),
-  ADD KEY `FK_EmailsUsuarios` (`idRemitente`);
+  ADD PRIMARY KEY (`idEmail`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -77,17 +86,7 @@ ALTER TABLE `emails`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `emails`
---
-ALTER TABLE `emails`
-  ADD CONSTRAINT `FK_EmailsUsuarios` FOREIGN KEY (`idRemitente`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
